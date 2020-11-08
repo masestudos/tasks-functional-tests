@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TasksTest {
 	
 	public WebDriver acessarAplicacao() {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\-moNGe_\\dev\\java\\seleniumDrivers\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver(); //agente colocar um chromedriver no path
 		driver.navigate().to("http://localhost:8001/tasks");
 		//estratégia de espera evita problema entre a execução

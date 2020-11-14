@@ -1,4 +1,4 @@
-package br.ce.wcaquino.taks.functional;
+package br.ce.wcaquino.tasks.functional;
 
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -35,7 +35,7 @@ public class TasksTest {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
-			//fluxo para quando não encontra um elemento, por isso usa o tru para não ficar travado
+			//fluxo para quando não encontra um elemento, por isso usa o try para não ficar travado
 			driver.findElement(By.id("addTodo")).click();
 			driver.findElement(By.id("task")).sendKeys("Teste via Selenium");
 			driver.findElement(By.id("dueDate")).sendKeys("25/12/2020");
@@ -52,7 +52,7 @@ public class TasksTest {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
-			//fluxo para quando não encontra um elemento, por isso usa o tru para não ficar travado
+			//fluxo para quando não encontra um elemento, por isso usa o try para não ficar travado
 			driver.findElement(By.id("addTodo")).click();
 			driver.findElement(By.id("dueDate")).sendKeys("25/12/2020");
 			driver.findElement(By.id("saveButton")).click();
@@ -68,7 +68,7 @@ public class TasksTest {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
-			//fluxo para quando não encontra um elemento, por isso usa o tru para não ficar travado
+			//fluxo para quando não encontra um elemento, por isso usa o try para não ficar travado
 			driver.findElement(By.id("addTodo")).click();
 			driver.findElement(By.id("task")).sendKeys("Teste via Selenium");
 			driver.findElement(By.id("saveButton")).click();
@@ -84,13 +84,35 @@ public class TasksTest {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
-			//fluxo para quando não encontra um elemento, por isso usa o tru para não ficar travado
+			//fluxo para quando não encontra um elemento, por isso usa o try para não ficar travado
 			driver.findElement(By.id("addTodo")).click();
 			driver.findElement(By.id("task")).sendKeys("Teste via Selenium");
 			driver.findElement(By.id("dueDate")).sendKeys("25/12/2010");
 			driver.findElement(By.id("saveButton")).click();
 			String message = driver.findElement(By.id("message")).getText();
 			Assert.assertEquals("Due date must not be in past", message);
+		} finally {
+			driver.quit();
+		}
+	}
+	
+	@Test
+	public void deveRemoverTarefaComSucesso() throws MalformedURLException {
+		WebDriver driver = acessarAplicacao();
+		
+		try {
+			//inserir tarefa
+			driver.findElement(By.id("addTodo")).click();
+			driver.findElement(By.id("task")).sendKeys("Teste via Selenium");
+			driver.findElement(By.id("dueDate")).sendKeys("25/12/2030");
+			driver.findElement(By.id("saveButton")).click();
+			String message = driver.findElement(By.id("message")).getText();
+			Assert.assertEquals("Success!", message);
+			
+			//remover tarefa
+			driver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
+			message = driver.findElement(By.id("message")).getText();
+			Assert.assertEquals("Success!", message);
 		} finally {
 			driver.quit();
 		}
